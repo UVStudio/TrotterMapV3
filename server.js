@@ -7,6 +7,12 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname + '/index.html'));
 });
 
+//init middleware to allow us to get data in req.body, or else we get undefined
+app.use(express.json({ extended: false }));
+
+//data route
+app.use('/api/weather', require('./api/weather'));
+
 //set static folder
 app.use(express.static(path.join(__dirname, '/public')));
 
