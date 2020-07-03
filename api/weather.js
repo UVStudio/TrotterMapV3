@@ -18,8 +18,6 @@ router.get('/current', async (req, res) => {
   }
 });
 
-module.exports = router;
-
 //@route    GET /api/current
 //@desc     get current weather info
 //@access   public
@@ -37,8 +35,3 @@ router.get('/forecast', async (req, res) => {
 });
 
 module.exports = router;
-
-//`https://api.openweathermap.org/data/2.5/weather?q=${citySelection}&appid=bfacc96b28036034f428cbe9a5293b1b`);
-//`https://api.openweathermap.org/data/2.5/forecast?q=${citySelection}&appid=bfacc96b28036034f428cbe9a5293b1b`);
-
-//'http://api.openweathermap.org/data/2.5/weather?q=toronto,ca&appid=bfacc96b28036034f428cbe9a5293b1b'

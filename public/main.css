@@ -21,3 +21,16 @@ body {
   z-index: 1;
   background-color: rgba(23, 150, 184, 0.9) !important;
 }
+
+#searchBtn:hover {
+  color: rgba(23, 150, 184, 1) !important;
+}
+
+#searchInput {
+  width: 200px !important;
+  outline-color: white;
+}
+
+.input-group {
+  width: auto;
+}
