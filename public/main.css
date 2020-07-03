@@ -28,9 +28,13 @@ body {
 
 #searchInput {
   width: 200px !important;
-  outline-color: white;
 }
 
 .input-group {
   width: auto;
+}
+
+.dropdown-item {
+  font-family: Helvetica, sans-serif;
+  cursor: pointer;
 }
