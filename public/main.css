@@ -123,7 +123,8 @@ body {
 }
 
 .btn-text {
-  margin: -2px 4px 0px 4px;
+  font-family: Helvetica, sans-serif;
+  margin: 1px;
   font-size: 1.4em !important;
 }
 

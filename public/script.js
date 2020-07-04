@@ -12,12 +12,13 @@ document.getElementById('searchBtn').addEventListener('click', searchFunc);
 function searchFunc() {
   document.getElementById('searchDropdown').innerHTML = '';
   const searchInput = document.getElementById('searchInput');
+  const searchInputReg = new RegExp(searchInput.value, 'i');
   fetch('./cityList.json')
     .then((response) => {
       return response.json();
     })
     .then((data) => {
-      const result = data.filter((e) => e.includes(searchInput.value));
+      const result = data.filter((e) => searchInputReg.test(e));
       if (result.length > 10) {
         const shortenResult = result.slice(0, 10);
         for (const e of shortenResult) {
@@ -134,7 +135,7 @@ function forecastWeather(e) {
       e.city.name
     }</h5><button class="btn-close"><p class="btn-text">x</p></button><p>${(
       e.list[forecast].main.temp - 273.15
-    ).toFixed(1)} C<p>${
+    ).toFixed(1)} C<p class="">${
       e.list[forecast].weather[0].description
     }</p><img class="center weather-image" src="http://openweathermap.org/img/wn/${
       e.list[forecast].weather[0].icon
