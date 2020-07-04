@@ -12,15 +12,15 @@ $(() => {
   $('.navbar-toggler').on('click', () => {
     $('.navbar').toggleClass('expanded');
     if ($('.navbar').hasClass('expanded')) {
-      $('.nav-slide').animate({ top: '160px' }, 'fast');
+      $('.nav-slide').animate({ top: '110px' }, 'fast');
     } else {
-      $('.nav-slide').animate({ top: '80px' }, 'fast');
+      $('.nav-slide').animate({ top: '60px' }, 'fast');
     }
   });
   //current / forecast dynamic text
   const active = document.getElementsByClassName('active');
   $('.nav-link').html(active[0].innerHTML);
-  $('.dropdown-menu').on('click', (e) => {
+  $('#forecast-dropdown').on('click', (e) => {
     $('.nav-link').html(e.target.textContent);
   });
 });
