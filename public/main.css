@@ -36,5 +36,99 @@ body {
 
 .dropdown-item {
   font-family: Helvetica, sans-serif;
+  font-size: 0.9em;
   cursor: pointer;
+}
+
+/* popup card */
+
+.weather-image {
+  width: 90px;
+  height: 90px;
+}
+
+.popup-bubble {
+  /* Position the bubble centred-above its parent. */
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translate(-50%, -100%);
+  /* Style the bubble. */
+  background-color: rgb(23, 150, 184);
+  padding: 10px;
+  border-radius: 10px;
+  font-family: 'Shadows Into Light', cursive;
+  color: white;
+  overflow-y: auto;
+  min-height: 150px;
+  min-width: 120px;
+  box-shadow: 0px 2px 10px 1px rgba(0, 0, 0, 0.5);
+  opacity: 0.95;
+}
+
+.popup-bubble-anchor {
+  /* Position the div a fixed distance above the tip. */
+  position: absolute;
+  width: 100%;
+  bottom: /* TIP_HEIGHT= */ 12px;
+  left: 0;
+}
+
+/* This element draws the tip. */
+.popup-bubble-anchor::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  /* Center the tip horizontally. */
+  transform: translate(-50%, 0);
+  /* The tip is a https://css-tricks.com/snippets/css/css-triangle/ */
+  width: 0;
+  height: 0;
+  /* The tip is 8px high, and 12px wide. */
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: /* TIP_HEIGHT= */ 12px solid rgb(122, 167, 226);
+}
+
+.popup-container {
+  cursor: auto;
+  height: 0;
+  position: absolute;
+  /* The max width of the info window. */
+  width: 200px;
+  animation-name: fadein;
+  animation-duration: 0.5s;
+}
+
+.popup-bubble p {
+  font-size: 1.3em;
+}
+
+.popup-bubble h5 {
+  display: inline;
+}
+
+.btn-close {
+  display: inline;
+  position: relative;
+  float: right;
+  color: white;
+  background: none;
+  border: 1px solid white;
+  margin: 0px 2px 0px 10px;
+  border-radius: 50%;
+  top: -3px;
+  left: 2px;
+}
+
+.btn-text {
+  margin: -2px 4px 0px 4px;
+  font-size: 1.4em !important;
+}
+
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }

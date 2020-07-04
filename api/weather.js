@@ -21,7 +21,7 @@ router.get('/current/:id', async (req, res) => {
 //@route    GET /api/current
 //@desc     get current weather info
 //@access   public
-router.get('/forecast/:city', async (req, res) => {
+router.get('/forecast/:id', async (req, res) => {
   let city = req.params.id;
   try {
     const response = await axios.get(

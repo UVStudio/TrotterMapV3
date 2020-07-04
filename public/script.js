@@ -6,7 +6,7 @@ function initMap() {
   });
 }
 
-//get search dropdown options
+//get search dropdown options & decide which API route to hit
 document.getElementById('searchBtn').addEventListener('click', searchFunc);
 
 function searchFunc() {
@@ -38,17 +38,40 @@ function searchFunc() {
     });
 }
 
-//Choose the city from search dropdown box
+const current = document.getElementById('current');
+
+//MAIN SEARCH FUNCTION - always active - Choose the city from search dropdown box
 document.getElementById('searchDropdown').addEventListener('click', (e) => {
-  //console.log(e.target.textContent);
   const city = e.target.textContent;
-  fetch(`./api/weather/current/${city}`)
-    .then((response) => response.json())
-    .then((data) => currentWeather(data));
+  if (current.classList.contains('active')) {
+    fetch(`./api/weather/current/${city}`)
+      .then((response) => response.json())
+      .then((data) => currentWeather(data));
+  } else {
+    fetch(`./api/weather/forecast/${city}`)
+      .then((response) => response.json())
+      .then((data) => forecastWeather(data));
+  }
 });
 
-//function to populate popup with current weather info
+//declare variables used throughout
 let citySelection, lng, lat, center, weatherInfo, infoWindow;
+const hoursArray = document.querySelectorAll('.hours');
+
+/***** CURRENT WEATHER ******/
+
+//function to populate popup with CURRENT weather info
+function runCurrent() {
+  current.classList.add('active');
+  for (const e of hoursArray) {
+    if (e.classList.contains('active')) {
+      e.classList.remove('active');
+    }
+  }
+  deletePopups();
+}
+
+current.addEventListener('click', runCurrent);
 
 function currentWeather(e) {
   lng = e.coord.lon;
@@ -57,9 +80,9 @@ function currentWeather(e) {
   map.panTo(center);
 
   //populating the Info Window with weather infor
-  weatherInfo = `<h4>${
+  weatherInfo = `<h5>${
     e.name
-  }</h4><button class="btn-close"><p class="btn-text">x</p></button><p>${(
+  }</h5><button class="btn-close"><p class="btn-text">x</p></button><p>${(
     e.main.temp - 273.15
   ).toFixed(1)} C<p>${
     e.weather[0].description
@@ -67,7 +90,74 @@ function currentWeather(e) {
     e.weather[0].icon
   }.png" alt="weather-image-placeholder" >`;
 
-  // weatherInfo = '<h4>'+x.name+'</h4>'+'<button class="btn-close"><p class="btn-text">x</p></button>'+'<p>'+(x.main.temp-273.15).toFixed(1)+' C'+'<p>'+x.weather[0].description+'</p>'+'<img class="center weather-image" src="http://openweathermap.org/img/wn/'+x.weather[0].icon+'.png"'+'alt="weather-image-placeholder" >';
+  //call the Popup object, passing weatherInfo
+  createPopupCard(weatherInfo);
+}
+
+/****** FORECAST WEATHER ********/
+
+//function to pick which hours under forecast
+hoursArray.forEach((e) => {
+  e.addEventListener('click', (e) => {
+    current.classList.remove('active');
+    e.target.classList.add('active');
+    for (const f of hoursArray) {
+      if (f !== e.target) {
+        f.classList.remove('active');
+      }
+    }
+    deletePopups();
+  });
+});
+
+function forecastHour() {
+  for (const e of hoursArray) {
+    if (e.classList.contains('active')) {
+      return e;
+    }
+  }
+}
+
+//function to populate popup with forecast info
+
+function forecastWeather(e) {
+  lng = e.city.coord.lon;
+  lat = e.city.coord.lat;
+  center = new google.maps.LatLng(lat, lng);
+  map.panTo(center);
+  let chosenHour = forecastHour();
+  let chosenHourText = chosenHour.textContent;
+
+  //populating the popup with the chosen forecast by hour
+  weatherInfo = function (forecast, hour) {
+    return `<h5>${
+      e.city.name
+    }</h5><button class="btn-close"><p class="btn-text">x</p></button><p>${(
+      e.list[forecast].main.temp - 273.15
+    ).toFixed(1)} C<p>${
+      e.list[forecast].weather[0].description
+    }</p><img class="center weather-image" src="http://openweathermap.org/img/wn/${
+      e.list[forecast].weather[0].icon
+    }.png"+alt="weather-image-placeholder"><p>${hour} hours from now</p>`;
+  };
+
+  switch (chosenHourText) {
+    case '3 Hour Forecast':
+      weatherInfo = weatherInfo(0, 3);
+      break;
+    case '6 Hour Forecast':
+      weatherInfo = weatherInfo(1, 6);
+      break;
+    case '9 Hour Forecast':
+      weatherInfo = weatherInfo(2, 9);
+      break;
+    case '12 Hour Forecast':
+      weatherInfo = weatherInfo(3, 12);
+      break;
+    case '24 Hour Forecast':
+      weatherInfo = weatherInfo(7, 24);
+      break;
+  }
   //call the Popup object, passing weatherInfo
   createPopupCard(weatherInfo);
 }
@@ -94,6 +184,13 @@ function createPopupCard(e) {
       }
     });
   });
+}
+
+//function to remove all popup containers. Divs with class of 'popup-container'
+function deletePopups() {
+  const popupContainers = document.getElementsByClassName('popup-container');
+  const popupContainersArray = [].slice.call(popupContainers);
+  popupContainersArray.forEach((e) => e.parentNode.removeChild(e));
 }
 
 //from google maps API - function to create google map API custom popup, passing weatherInfo from selectCity function
