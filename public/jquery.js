@@ -2,7 +2,7 @@ $(() => {
   //navbar animation, show and hide
   $('.nav-slide').on('click', () => {
     if ($('.navbar').hasClass('show') && $('.navbar').hasClass('expanded')) {
-      $('.navbar').animate({ top: '-140px' }, 'fast').toggleClass('show');
+      $('.navbar').animate({ top: '-150px' }, 'fast').toggleClass('show');
     } else if ($('.navbar').hasClass('show')) {
       $('.navbar').animate({ top: '-70px' }, 'fast').toggleClass('show');
     } else {
