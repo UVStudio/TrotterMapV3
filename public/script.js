@@ -139,7 +139,7 @@ function forecastWeather(e) {
       e.list[forecast].weather[0].description
     }</p><img class="center weather-image" src="http://openweathermap.org/img/wn/${
       e.list[forecast].weather[0].icon
-    }.png"+alt="weather-image-placeholder"><p>${hour} hours from now</p>`;
+    }.png" alt="weather-image-placeholder"><p>${hour} hours from now</p>`;
   };
 
   switch (chosenHourText) {
