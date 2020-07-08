@@ -70,9 +70,15 @@ body {
 
 /* popup card */
 
-.weather-image {
+/* .weather-image {
   width: 90px;
   height: 90px;
+} */
+
+.weather-image {
+  width: auto;
+  max-width: 100%;
+  height: auto;
 }
 
 .popup-bubble {
