@@ -28,12 +28,18 @@ body {
   background-color: var(--main-color) !important;
 }
 
-#searchBtn:hover {
+/* #searchBtn:hover {
   color: rgba(23, 150, 184, 1) !important;
-}
+} */
 
 #searchInput {
   width: 200px !important;
+}
+
+#searchInput:focus {
+  outline: none !important;
+  border: 2px solid white;
+  box-shadow: 0 0 5px white;
 }
 
 .input-group {
@@ -166,4 +172,8 @@ body {
   display: block;
   margin-left: auto;
   margin-right: auto;
+}
+
+.hidden {
+  display: none;
 }
