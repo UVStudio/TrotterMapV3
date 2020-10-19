@@ -26,7 +26,7 @@ router.get('/forecast/:id', async (req, res) => {
   let city = req.params.id;
   try {
     const response = await axios.get(
-      `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=bfacc96b28036034f428cbe9a5293b1b`
+      `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${weatherAPI}`
     );
     const weatherData = response.data;
     res.json(weatherData);
