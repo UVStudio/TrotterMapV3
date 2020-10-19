@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const axios = require('axios');
+const weatherAPI = process.env.OPENWEATHERAPI;
 
 //@route    GET /api/current
 //@desc     get current weather info
@@ -9,7 +10,7 @@ router.get('/current/:id', async (req, res) => {
   let city = req.params.id;
   try {
     const response = await axios.get(
-      `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=bfacc96b28036034f428cbe9a5293b1b`
+      `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${weatherAPI}`
     );
     const weatherData = response.data;
     res.json(weatherData);
