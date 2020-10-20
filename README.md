@@ -1,6 +1,6 @@
-## Tattoo-Art
+## TrotterMap
 
-TrotterMaps is inspired by weather reporting on broadcast TV that most internet based weather reporting sites lack. Weather info from user's selected cities are displayed on Google Maps, using cards. A user can easily compare weather from different cities. Great for travellers and backpackers.
+TrotterMap is inspired by features of weather reporting on broadcast TV that most internet based weather reporting sites lack. Combining the best from TV and the web, weather info from user's selected cities are displayed on Google Maps, using cards. A user can easily compare weather from different cities. Great for travellers and backpackers.
 
 ## Contributor
 
@@ -8,8 +8,8 @@ TrotterMaps is inspired by weather reporting on broadcast TV that most internet 
 
 ## Gallery
 
-![Trotter Maps 1](./images/trotter.jpg)
-![Trotter Maps 2](./images/trotter2.jpg)
+![Trotter Map 1](./images/trotter.jpg)
+![Trotter Map 2](./images/trotter2.jpg)
 
 ## TechStack:
 
